@@ -13,7 +13,7 @@ using System;
 using System.Configuration;
 using System.Threading;
 using UCS.Core.Network;
-using UCS.Core.Web;
+using UCS.Core;
 
 namespace UCS.Core.Threading
 {
@@ -31,7 +31,7 @@ namespace UCS.Core.Threading
         {
             T = new Thread(() =>
             {
-                new VersionChecker();
+                //new VersionChecker();
                 new PacketManager().Start();
                 new MessageManager();
                 new ResourcesManager();

@@ -71,7 +71,7 @@ namespace UCS.Core
             }
             catch (Exception ex)
             {
-                //Debugger.WriteLine("[UCS]    An exception occured during CreateAccount processing :", ex);
+                _Logger.Print("     An exception occured during CreateAccount processing :", Types.ERROR);
             }
         }
 
@@ -98,7 +98,7 @@ namespace UCS.Core
             }
             catch (Exception ex)
             {
-                //Debugger.WriteLine("[UCS]    An exception occured during CreateAlliance processing :", ex);
+                _Logger.Print("     An exception occured during CreateAlliance processing :", Types.ERROR);
             }
         }
 
@@ -130,7 +130,7 @@ namespace UCS.Core
             }
             catch (Exception ex)
             {
-                //Debugger.WriteLine("[UCS]    An exception occured during GetAccount processing :", ex);
+                _Logger.Print("     An exception occured during GetAccount processing :", Types.ERROR);
             }
             return account;
         }
@@ -158,12 +158,12 @@ namespace UCS.Core
                         if (count++ >= 100)
                             break;
                     }
-                    //Debugger.WriteLine("[UCS]    The server loaded " + count + " alliances");
+                    _Logger.Print("     The server loaded " + count + " alliances",Types.DEBUG);
                 }
             }
             catch (Exception ex)
             {
-                //Debugger.WriteLine("[UCS]    An exception occured during GetAlliance processing:", ex);
+                _Logger.Print("      An exception occured during GetAlliance processing:", Types.ERROR);
             }
             return alliances;
         }
@@ -184,12 +184,12 @@ namespace UCS.Core
                         if (count++ >= 100)
                             break;
                     }
-                    //Debugger.WriteLine("[UCS]    The server loaded " + count + " players");
+                    _Logger.Print("     The server loaded " + count + " players",Types.DEBUG);
                 }
             }
             catch (Exception ex)
             {
-                //Debugger.WriteLine("[UCS]    An exception occured during GetPlayers processing:", ex);
+                _Logger.Print("      An exception occured during GetPlayers processing:", Types.ERROR);
             }
             return players;
         }
@@ -216,7 +216,7 @@ namespace UCS.Core
             }
             catch (Exception ex)
             {
-                //Debugger.WriteLine("[UCS]    An exception occured during GetAlliance processing :", ex);
+                _Logger.Print("      An exception occured during GetAlliance processing :", Types.ERROR);
             }
             return alliance;
         }
@@ -383,11 +383,11 @@ namespace UCS.Core
                     }
                      context.SaveChanges();
                 }
-                //Debugger.WriteLine("[UCS]    All players in memory has been saved to database at " + DateTime.Now);
+                _Logger.Print("     All players in memory has been saved to database at " + DateTime.Now,Types.INFO);
             }
             catch (Exception ex)
             {
-                //Debugger.WriteLine("[UCS]    An exception occured during Save processing for avatars :", ex);
+                _Logger.Print("     An exception occured during Save processing for avatars :", Types.ERROR);
             }
         }
 
@@ -436,11 +436,11 @@ namespace UCS.Core
                     }
                     context.SaveChanges();
                 }
-                //Debugger.WriteLine("[UCS]    All alliances in memory has been saved to database at " + DateTime.Now);
+                _Logger.Print("      All alliances in memory has been saved to database at " + DateTime.Now, Types.INFO);
             }
             catch (Exception ex)
             {
-                //Debugger.WriteLine("[UCS]    An exception occured during Save processing for alliances :", ex);
+                _Logger.Print("     An exception occured during Save processing for alliances :", Types.ERROR);
             }
         }
 
@@ -457,29 +457,23 @@ namespace UCS.Core
             {
                 if (ConfigurationManager.AppSettings["databaseConnectionName"] == "mysql")
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("[UCS]    An exception occured when connecting to the MySQL Server.");
-                    Console.WriteLine("[UCS]    Please check your database configuration !");
-                    Console.ResetColor();
-                    Console.ReadKey();
+                    _Logger.Print("     An exception occured when connecting to the MySQL Server.",Types.ERROR);
+                    _Logger.Print("     Please check your database configuration !",Types.ERROR);
+                    Console.ReadLine();
                     Environment.Exit(0);
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("[UCS]    An exception occured when connecting to the SQLite database.");
-                    Console.WriteLine("[UCS]    Please check your database configuration !");
-                    Console.ResetColor();
-                    Console.ReadKey();
+                    _Logger.Print("     An exception occured when connecting to the SQLite database.", Types.ERROR);
+                    _Logger.Print("     Please check your database configuration !", Types.ERROR);
+                    Console.ReadLine();
                     Environment.Exit(0);
                 }
             }
             catch (Exception)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("[UCS]    An unknown exception occured when trying to connect to the sql server.");
-                Console.WriteLine("[UCS]    Please check your database configuration !");
-                Console.ResetColor();
+                _Logger.Print("     An exception occured when connecting to the SQL Server.", Types.ERROR);
+                _Logger.Print("     Please check your database configuration !", Types.ERROR);
                 Console.ReadKey();
                 Environment.Exit(0);
             }

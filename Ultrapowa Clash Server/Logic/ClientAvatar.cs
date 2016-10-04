@@ -88,7 +88,7 @@ namespace UCS.Logic
                 : Convert.ToInt32(ConfigurationManager.AppSettings["startingTrophies"]);
 
             TutorialStepsCount = 0x0A;
-            m_vAvatarName = "NoNameYet";
+            m_vAvatarName = ConfigurationManager.AppSettings["defaultName"];
             SetResourceCount(ObjectManager.DataTables.GetResourceByName("Gold"),
                 Convert.ToInt32(ConfigurationManager.AppSettings["startingGold"]));
             SetResourceCount(ObjectManager.DataTables.GetResourceByName("Elixir"),

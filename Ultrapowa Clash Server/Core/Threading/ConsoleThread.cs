@@ -16,7 +16,7 @@ using static UCS.Helpers.Utils;
 using static UCS.Helpers.CommandParser;
 using static System.Console;
 using static System.Environment;
-using UCS.Core.Web;
+using UCS.Core;
 using System.IO;
 
 namespace UCS.Core.Threading
@@ -49,8 +49,7 @@ namespace UCS.Core.Threading
                     Thread.Sleep(20);
                 }
                 ForegroundColor = ConsoleColor.Red;
-                WriteLine(
-                    @"
+                WriteLine(@"
       ____ ___.__   __                                              
      |    |   \  |_/  |_____________  ______   ______  _  _______   
      |    |   /  |\   __\_  __ \__  \ \____ \ /  _ \ \/ \/ /\__  \  
@@ -60,23 +59,25 @@ namespace UCS.Core.Threading
                   ");
 
                 ResetColor();
-                WriteLine("[UCS]    -> This program is made by the Ultrapowa Network development team.");
-                WriteLine("[UCS]    -> You can find the source at www.ultrapowa.com");
-                WriteLine("[UCS]    -> Don't forget to visit www.ultrapowa.com daily for updates!");
-                VersionChecker.VersionMain();
+                _Logger.Print("     -> This program is made by the Ultrapowa Network development team.", Types.INFO);
+                _Logger.Print("     -> You can find the source at www.ultrapowa.com", Types.INFO);
+                _Logger.Print("     -> Don't forget to visit www.ultrapowa.com daily for updates!", Types.INFO);
+                //VersionChecker.VersionMain();
+                _Logger.Print("     -> UCS is now starting...", Types.INFO);
                 WriteLine("");
-                WriteLine("[UCS]    -> UCS is now starting...");
-                WriteLine("");
-               if(!File.Exists("restarter.bat"))
+                if (!File.Exists("restarter.bat")) { 
                     using (StreamWriter sw = new StreamWriter("restarter.bat"))
                     {
                         sw.WriteLine("echo off");
-                        sw.WriteLine("echo.");
+                        sw.WriteLine("echo .");
+                        sw.WriteLine("echo .");
                         sw.WriteLine("taskkill /f /im ucs.exe -t");
                         sw.WriteLine("start ucs.exe");
-                        sw.WriteLine("exit");  
+                        sw.WriteLine("exit");
 
                     }
+                    _Logger.Print("     -> Created Restarter.bat", Types.DEBUG);
+                }
                 MemoryThread.Start();
                 NetworkThread.Start();
                 while ((Command = ReadLine()) != null)

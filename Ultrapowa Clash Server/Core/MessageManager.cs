@@ -13,6 +13,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Threading;
 using UCS.PacketProcessing;
+using UCS.Core;
 
 namespace UCS.Core
 {
@@ -33,7 +34,7 @@ namespace UCS.Core
         {
             PacketProcessingDelegate packetProcessing = PacketProcessing;
             packetProcessing.BeginInvoke(null, null);
-            Console.WriteLine("[UCS]    Message manager has been successfully started !");
+            _Logger.Print("     Message manager has been successfully started !",Types.INFO);
         }
 
         #endregion Public Constructors
@@ -59,7 +60,7 @@ namespace UCS.Core
                     }
                     catch (Exception e)
                     {
-                        //Console.WriteLine("ERROR: " + e); //just for testing but works fine
+                        _Logger.Print("     " + e,Types.ERROR);
                     }
                 }, p);
             }
