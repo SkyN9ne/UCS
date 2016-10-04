@@ -10,6 +10,8 @@
   <add key="startingTrophies" value="random" />
   <!-- User starting trophies - set to random for random starting trophies -->
   <add key="startingLevel" value="1" />
+  <!-- Set the loggin lvl, 1 for errors only, 2 for warning, 3 for debuging and 4 for overall logging-->
+  <add key="logginglvl" value="4" />
   <!-- User starting level (Beware, 9 is the highest starting level) -->
   <add key="UpdateUrl" value="https://ultrapowa.com/" />
   <!-- Specify where to redirect if the CoC version is outdated -->

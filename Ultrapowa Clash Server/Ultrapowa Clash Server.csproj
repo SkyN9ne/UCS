@@ -282,6 +282,8 @@
     <Compile Include="Core\Crypto\TweetNaCl\verify_16.cs" />
     <Compile Include="Core\Crypto\TweetNaCl\xsalsa20.cs" />
     <Compile Include="Core\Crypto\TweetNaCl\xsalsa20poly1305.cs" />
+    <Compile Include="Core\logger.cs" />
+    <Compile Include="Core\loggerTypes.cs" />
     <Compile Include="Core\Threading\VersionChecker.cs" />
     <Compile Include="Core\Performances.cs" />
     <Compile Include="Logic\StreamEntry\InvitationStreamEntry.cs" />
