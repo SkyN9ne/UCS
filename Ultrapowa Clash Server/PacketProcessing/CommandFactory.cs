@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using UCS.Core;
 using UCS.Helpers;
 using UCS.PacketProcessing.Commands;
 
@@ -104,10 +105,10 @@ namespace UCS.PacketProcessing
             var cm = br.ReadUInt32WithEndian();
             if (m_vCommands.ContainsKey(cm))
             {
-                //Console.WriteLine("[UCS]    Processing " + m_vCommands[cm]);
+                _Logger.Print("[UCS]    Processing " + m_vCommands[cm],Types.INFO);
                 return Activator.CreateInstance(m_vCommands[cm], br);
             }
-            //Console.WriteLine("\t The command '" + cm + "' has been ignored");
+            _Logger.Print("\t The command '" + cm + "' has been ignored",Types.INFO);
             return null;
         }
 

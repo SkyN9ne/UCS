@@ -17,6 +17,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using UCS.Core.Network;
+using UCS.Core;
 using UCS.Files;
 using UCS.Files.CSV;
 using UCS.Files.Logic;
@@ -53,7 +54,7 @@ namespace UCS.Core
             new Timer(Restart, null, 10800000, 0);
             TimerReference = TimerItem;
             m_vRandomSeed = new Random();
-            Console.WriteLine("[UCS]    Database Sync started successfully");
+            _Logger.Print("     Database Sync started successfully",Types.INFO);
             
         }
 
@@ -71,7 +72,7 @@ namespace UCS.Core
             m_vHomeDefault = "";
             m_vAvatarSeed = 0;
             m_vAllianceSeed = 0;
-            Console.WriteLine("[UCS]    Object Manager unloaded successfully");
+            _Logger.Print("     Object Manager unloaded successfully",Types.INFO);
         }
 
         /// <summary>
@@ -281,13 +282,12 @@ namespace UCS.Core
                 
                 */
 
-                Console.WriteLine("[UCS]    Loading server gamefiles & data...");
+                _Logger.Print("     Loading server gamefiles & data...",Types.DEBUG);
                 for (var i = 0; i < gameFiles.Count; i++)
                 {
-                    Console.Write("             ->  " + gameFiles[i].Item1);
+                    _Logger.Print("             ->  " + gameFiles[i].Item1,Types.DEBUG);
                     DataTables.InitDataTable(new CSVTable(gameFiles[i].Item2), gameFiles[i].Item3);
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(" done");
                     Console.ResetColor();
                 }
 
@@ -297,11 +297,11 @@ namespace UCS.Core
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine();
                 Console.WriteLine(); 
-                Console.WriteLine("[UCS][ERROR]    Error loading Gamefiles. Looks like you have :");
-                Console.WriteLine("[UCS][ERROR]    -> Edited the files wrongly");
-                Console.WriteLine("[UCS][ERROR]    -> Made mistakes by deleting values");
-                Console.WriteLine("[UCS][ERROR]    -> Entered High or low value");
-                Console.WriteLine("[UCS][ERROR]    -> Please check to these errors");
+                _Logger.Print("     Error loading Gamefiles. Looks like you have :",Types.ERROR);
+                _Logger.Print("     -> Edited the files wrongly", Types.ERROR);
+                _Logger.Print("     -> Made mistakes by deleting values", Types.ERROR);
+                _Logger.Print("     -> Entered High or low value", Types.ERROR);
+                _Logger.Print("     -> Please check to these errors", Types.ERROR);
                 Console.ResetColor();
                 Console.ReadKey();
                 Environment.Exit(0);
@@ -315,11 +315,10 @@ namespace UCS.Core
         /// </summary>
         public static void LoadNpcLevels()
         {
-            Console.Write("\n[UCS]    Loading Npc levels... ");
+            _Logger.Print("\n       Loading Npc levels... ", Types.INFO);
             for (var i = 0; i < 50; i++)
                 using (var sr = new StreamReader(@"Gamefiles/pve/level" + (i + 1) + ".json"))
                     NpcLevels.Add(i + 17000000, sr.ReadToEnd());
-            Console.WriteLine("done");
         }
 
         /// <summary>

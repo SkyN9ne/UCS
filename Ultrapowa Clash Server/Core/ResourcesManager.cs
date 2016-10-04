@@ -86,7 +86,7 @@ namespace UCS.Core
             }
             catch (Exception e)
             {
-                //Debugger.WriteLine("[UCS]    Error dropping client: ", e, 4);
+                _Logger.Print("     Error dropping client: ",Types.ERROR);
             }
         }
 

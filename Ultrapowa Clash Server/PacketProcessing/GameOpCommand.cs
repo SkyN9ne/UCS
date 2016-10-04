@@ -13,8 +13,8 @@ using System;
 using UCS.Core;
 using UCS.Core.Network;
 using UCS.Logic;
-//using static UCS.Core.Debugger;
 using UCS.PacketProcessing.Messages.Server;
+using System.Configuration;
 
 namespace UCS.PacketProcessing
 {
@@ -30,12 +30,13 @@ namespace UCS.PacketProcessing
 
         public static void SendCommandFailedMessage(Client c)
         {
-            Console.WriteLine("GameOp command failed. Insufficient privileges. Requster ID -> " + c.GetLevel().GetPlayerAvatar().GetId());
+            _Logger.Print("GameOp command failed. Insufficient privileges. Requster ID -> " + c.GetLevel().GetPlayerAvatar().GetId(), Types.DEBUG);
             var p = new GlobalChatLineMessage(c);
             p.SetChatMessage("GameOp command failed. Insufficient privileges.");
             p.SetPlayerId(0);
             p.SetLeagueId(2);
-            p.SetPlayerName("Ultrapowa Clash Server");
+            string srvname = ConfigurationManager.AppSettings["serverName"];
+            p.SetPlayerName(srvname);
             PacketManager.ProcessOutgoingPacket(p);
         }
 

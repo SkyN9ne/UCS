@@ -11,6 +11,7 @@ namespace UCS.Core
         INFO,
         DEBUG,
         WARNING,
-        ERROR
+        ERROR,
+        DIRECT
    }
 }

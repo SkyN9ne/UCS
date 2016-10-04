@@ -15,6 +15,7 @@ using System.Net.Sockets;
 using System.Threading;
 using UCS.Logic;
 using UCS.PacketProcessing;
+using UCS.Core;
 
 namespace UCS.Core.Network
 {
@@ -64,7 +65,7 @@ namespace UCS.Core.Network
             OutgoingProcessingDelegate outgoingProcessing = OutgoingProcessing;
             incomingProcessing.BeginInvoke(null, null);
             outgoingProcessing.BeginInvoke(null, null);
-            Console.WriteLine("[UCS]    Packet Manager started successfully");
+            _Logger.Print("     Packet Manager started successfully",Types.INFO);
         }
 
         private void IncomingProcessing()

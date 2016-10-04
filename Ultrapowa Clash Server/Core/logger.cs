@@ -22,10 +22,6 @@ namespace UCS.Core
             string filePath = string.Concat(Environment.CurrentDirectory, @"\Logs\logs.txt");
             int loggerlvl = Convert.ToInt32(ConfigurationManager.AppSettings["logginglvl"]);
 
-            /*if (!Directory.Exists("Logs"))
-                +            {
-                +Directory.CreateDirectory("Logs");
-                +            }*/
             if (!Directory.Exists("Logs"))
             {
                 Directory.CreateDirectory("Logs");
@@ -45,18 +41,21 @@ namespace UCS.Core
                 case Types.ERROR:
                     type = 4;
                     break;
+                case Types.DIRECT:
+                    type = 5;
+                    break;
             }
 
             if(loggerlvl == 0)
             {
-                Console.WriteLine("[ " + types + " ] ->    " + text);
+                Console.WriteLine("[" + types + "] ->    " + text);
             } else if(loggerlvl == 1)
             {
                 if(type == 1)
                 {
                     using(StreamWriter sw = new StreamWriter(filePath, true))
                     {
-                        sw.WriteLine("[ ERROR ] -> " + text);
+                        sw.WriteLine("[ERROR] -> " + text);
                     }
                 }
             } else if(loggerlvl == 2)
@@ -65,7 +64,7 @@ namespace UCS.Core
                 {
                     using(StreamWriter sw = new StreamWriter(filePath, true))
                     {
-                        sw.WriteLine("[ " + types + " ] -> " + text);
+                        sw.WriteLine("["+ types + "] -> " + text);
                     }
                 }
             } else if(loggerlvl == 3)
@@ -74,7 +73,7 @@ namespace UCS.Core
                 {
                     using(StreamWriter sw = new StreamWriter(filePath, true))
                     {
-                        sw.WriteLine("[ " + types + " ] -> " + text);
+                        sw.WriteLine("[" + types + "] -> " + text);
                     }
                 }
             }
@@ -84,14 +83,14 @@ namespace UCS.Core
                 {
                     using (StreamWriter sw = new StreamWriter(filePath, true))
                     {
-                        sw.WriteLine("[ " + types + " ] -> " + text);
+                        sw.WriteLine("[" + types + "] -> " + text);
                     }
                 }
             }
 
             if(loggerlvl != 0)
             {
-                Console.WriteLine("[ " + types + " ] -> " + text);
+                Console.WriteLine("[UCS][" + types + "] -> " + text);
             }
         }
     }

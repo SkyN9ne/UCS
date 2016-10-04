@@ -16,6 +16,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using UCS.PacketProcessing;
+using UCS.Core;
 
 namespace UCS.Core.Network
 {
@@ -34,8 +35,8 @@ namespace UCS.Core.Network
                 {
                     Socket.Bind(new IPEndPoint(IPAddress.Any, port));
                     Socket.Listen(1000);
-                    Console.WriteLine("[UCS]    Gateway started on Port " + port);
-                    Console.WriteLine("[UCS]    Server started succesfully! Let's Play Clash of Clans!");
+                    _Logger.Print("     Gateway started on Port " + port, Types.INFO);
+                    _Logger.Print("     Server started succesfully! Let's Play Clash of Clans!",Types.INFO);
                     while (true)
                     {
                         allDone.Reset();
@@ -45,7 +46,7 @@ namespace UCS.Core.Network
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("[UCS]    Exception when attempting to host the server : " + e);
+                    _Logger.Print("     Exception when attempting to host the server : " + e,Types.ERROR);
                     Socket = null;
                 }
             }
@@ -77,7 +78,7 @@ namespace UCS.Core.Network
             {
                 Socket listener = (Socket)ar.AsyncState;
                 Socket clientSocket = listener.EndAccept(ar);
-                Console.WriteLine("[UCS]    Player connected -> " + ((IPEndPoint) clientSocket.RemoteEndPoint).Address + "");
+                _Logger.Print("[UCS]    Player connected -> " + ((IPEndPoint) clientSocket.RemoteEndPoint).Address + "", Types.ERROR);
                 ResourcesManager.AddClient(new Client(clientSocket), ((IPEndPoint) clientSocket.RemoteEndPoint).Address.ToString());
                 SocketRead.Begin(clientSocket, OnReceive, OnReceiveError);
             }

@@ -12,6 +12,7 @@
 using System;
 using System.IO;
 using System.Text;
+using UCS.Core;
 
 namespace UCS.PacketProcessing
 {
@@ -161,10 +162,10 @@ namespace UCS.PacketProcessing
         void CheckLength(int length, string typeName)
         {
             if (length < -1)
-                Console.WriteLine("The length of a " + typeName + " was invalid: " + length);
+                _Logger.Print("     The length of a " + typeName + " was invalid: " + length,Types.ERROR);
 
             if (length > BaseStream.Length - BaseStream.Position)
-                Console.WriteLine("The length of a " + typeName + " was larger than the remaining bytes: " + length);
+                _Logger.Print("     The length of a " + typeName + " was larger than the remaining bytes: " + length,Types.ERROR);
         }
 
         byte[] ReadByteArrayEndian(int count)

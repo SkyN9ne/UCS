@@ -15,6 +15,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using ThreadState = System.Threading.ThreadState;
 using Timer = System.Timers.Timer;
+using UCS.Core;
 
 namespace UCS.Core.Threading
 {
