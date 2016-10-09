@@ -24,8 +24,6 @@ To connect it with the game, you need the custom APK which you can download it f
 * Ultrapowa									
 * ADeltaX								
 * thecheater887
-* Berkan
-* Julian
 
 #Our helpers
 
