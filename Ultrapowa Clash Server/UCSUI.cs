@@ -176,6 +176,11 @@ namespace UCS
             ResourcesManager.GetPlayer(long.Parse(PlayerID.Text)).GetPlayerAvatar().SetName(PlayerNameBox.Text);
             ResourcesManager.GetPlayer(long.Parse(PlayerID.Text)).GetPlayerAvatar().SetAvatarLevel(int.Parse(lvlbox.Text));
             MessageBox.Show("Player Profile Updated.");
+            foreach (Level online in ResourcesManager.GetPlayer(long.Parse(PlayerID.Text)))
+            {
+                var ohd = new OwnHomeDataMessage(online.GetClient(), online);
+                PacketManager.ProcessOutgoingPacket(ohd);
+            }
 
         }
 

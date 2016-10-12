@@ -57,8 +57,8 @@ namespace UCS.Helpers
                     Environment.Exit(0);
                     break;
                 case "/startx":
+                    Application.EnableVisualStyles();
                     Application.Run(new UCSUI());
-
                     break;
 
                 default:
