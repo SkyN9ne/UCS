@@ -324,12 +324,6 @@
     <Compile Include="PacketProcessing\Messages\Server\PromoteAllianceMemberOkMessage.cs" />
     <Compile Include="PacketProcessing\Messages\Server\ReplayDataMessage.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="UCSUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UCSUI.Designer.cs">
-      <DependentUpon>UCSUI.cs</DependentUpon>
-    </Compile>
     <Compile Include="Utilities\ZLib\CRC32.cs" />
     <Compile Include="Utilities\ZLib\Deflate.cs" />
     <Compile Include="Utilities\ZLib\DeflateStream.cs" />
@@ -1029,11 +1023,6 @@
       <Progid>1</Progid>
       <DefaultIcon>icone-ucs.ico</DefaultIcon>
     </FileAssociation>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="UCSUI.resx">
-      <DependentUpon>UCSUI.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.101.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.101.0\build\net46\System.Data.SQLite.Core.targets')" />
