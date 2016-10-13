@@ -56,10 +56,6 @@ namespace UCS.Helpers
                 case "/shutdown":
                     Environment.Exit(0);
                     break;
-                case "/startx":
-                    Application.EnableVisualStyles();
-                    Application.Run(new UCSUI());
-                    break;
 
                 default:
                     Console.WriteLine(
